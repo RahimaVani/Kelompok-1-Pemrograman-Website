@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ulun Danu Beratan</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Montserrat',sans-serif;
+  background-color:#E9F4F9;
+  color:#1F2F38;
+  line-height:1.6;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Header & Nav */
+header{
+  background:rgba(58,124,165,0.9);
+  backdrop-filter:blur(6px);
+  padding:1rem 3rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10000;
+  box-shadow:0 3px 15px rgba(0,0,0,0.2);
+}
+header div{
+  font-size:1.5rem;font-weight:700;color:white;font-family:'Playfair Display',serif;
+}
+.nav-btn{
+  padding:.65rem 1.4rem;border-radius:25px;font-weight:600;
+  color:white;text-decoration:none;background:#2E6F83;
+  transition:.3s;font-size:.95rem;box-shadow:0 0 10px rgba(0,0,0,0.2);
+  position:relative; z-index:10001; cursor:pointer;
+}
+.nav-btn:hover{background:#6AB8D6;transform:scale(1.05);}
+
+/* Hero */
+.banner {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  position:relative;
+  background:url('https://images.unsplash.com/photo-1564934301944-6a4f233d4d9d?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+  overflow:hidden;
+  z-index:1;
+}
+.banner::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(10,40,70,0.6),rgba(0,0,0,0.8));
+  z-index:0;
+  pointer-events:none;
+}
+.particles {
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(white 1px,transparent 1px);
+  background-size:3px 3px;
+  opacity:0.2;
+  animation:moveStars 100s linear infinite;
+  z-index:0;
+  pointer-events:none;
+}
+.banner-content {
+  position:relative;
+  z-index:2;
+  animation:fadeUp 1.3s ease-out;
+}
+
+/* Sections */
+section h2{font-family:'Playfair Display',serif;font-size:2rem;color:#3A7CA5;margin-bottom:2rem;}
+.section{padding:4rem 3rem;text-align:center;animation:fadeUp 1s ease-out;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.8rem;max-width:1000px;margin:auto;}
+.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 6px 15px rgba(0,0,0,0.1);transition:.4s;}
+.card:hover{transform:translateY(-8px);}
+.card img{width:100%;height:13.5rem;object-fit:cover;}
+.card-content{padding:1.2rem;text-align:left;}
+.card-content h3{font-size:1.15rem;margin-bottom:.4rem;color:#2E6F83;}
+.btn-main{display:inline-block;margin-top:2rem;background:#3A7CA5;color:white;padding:.75rem 2rem;border-radius:25px;font-weight:600;text-decoration:none;font-size:1rem;transition:.3s;box-shadow:0 0 12px rgba(58,124,165,0.4);}
+.btn-main:hover{background:#6AB8D6;transform:scale(1.05);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+/* Helpdesk */
+.helpdesk-btn{
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  background:#3A7CA5;
+  color:white;
+  padding:1rem 1.5rem;
+  border-radius:40px;
+  font-weight:600;
+  font-size:1rem;
+  text-decoration:none;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
+  transition:.3s;
+  z-index:10002;
+  cursor:pointer;
+}
+.helpdesk-btn:hover{background:#6AB8D6;transform:scale(1.05);}
+.helpdesk-modal{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+  z-index:10003;
+}
+.helpdesk-content{
+  background:white;
+  width:90%; max-width:430px;
+  border-radius:18px;
+  padding:30px; text-align:center;
+  box-shadow:0 6px 25px rgba(0,0,0,0.3);
+  animation:fadeUp .4s ease-out;
+  position:relative;
+}
+.close-btn{position:absolute;top:12px;right:18px;font-size:24px;color:#3A7CA5;cursor:pointer;font-weight:700;}
+.helpdesk-content h2{font-family:'Playfair Display',serif;color:#2E6F83;font-size:1.4rem;margin-bottom:15px;}
+.helpdesk-content input,.helpdesk-content textarea{
+  width:100%;padding:11px;margin:7px 0;border:2px solid #D8E9F1;
+  border-radius:10px;outline:none;font-size:.92rem;
+}
+.helpdesk-content textarea{height:100px;resize:none;}
+.helpdesk-content button{
+  width:100%;margin-top:12px;background:#3A7CA5;color:white;
+  padding:12px;border-radius:12px;font-size:.95rem;font-weight:600;
+  border:none;cursor:pointer;transition:.3s;box-shadow:0 4px 12px rgba(58,124,165,0.3);
+}
+.helpdesk-content button:hover{background:#6AB8D6;transform:scale(1.03);}
+.wa-link{display:block;margin-top:12px;text-decoration:none;color:#25d366;font-weight:700;font-size:.95rem;}
+
+/* History */
+.history-section{display:none;background:#EAF6FB;padding:4rem 0;min-height:80vh;}
+.history-section h2{text-align:center;margin-bottom:1rem;color:#3A7CA5;}
+.status-card{transition:transform .3s,opacity .3s;}
+.status-card:hover{transform:translateY(-5px);}
+</style>
+</head>
+
+<body>
+<header>
+  <div>Ulun Danu Beratan</div>
+  <div>
+    <a class="nav-btn" id="homeBtn">Home</a>
+    <a class="nav-btn" id="historyBtn">History</a>
+    <a class="nav-btn" href="login.html">Login</a>
+    <a class="nav-btn" href="signup.html">Sign Up</a>
+  </div>
+</header>
+
+<div id="homeSection">
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="particles"></div>
+    <div class="banner-content">
+      <h1>Selamat Datang di Ulun Danu Beratan</h1>
+      <p>Menikmati pesona Danau Beratan & keindahan alam Bedugul</p>
+      <a href="#wisata">Jelajahi Sekarang</a>
+    </div>
+  </section>
+
+  <!-- Wisata -->
+  <section class="section" id="wisata" style="background:#E3F6FF;">
+    <h2>Informasi Wisata</h2>
+    <div class="grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1589307004173-3f79f5df0f92?auto=format&fit=crop&w=800&q=80"><div class="card-content"><h3>Pura Ulun Danu Beratan</h3></div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1590935215987-3a820c2cb1ec?auto=format&fit=crop&w=800&q=80"><div class="card-content"><h3>Kebun Raya Bedugul</h3></div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1563277744-2fbdc6efc56c?auto=format&fit=crop&w=800&q=80"><div class="card-content"><h3>Pasar Candikuning</h3></div></div>
+    </div>
+    <a class="btn-main" href="#">Lihat Selengkapnya Wisata</a>
+  </section>
+
+  <!-- UMKM -->
+  <section class="section" id="umkm">
+    <h2>UMKM Lokal</h2>
+    <div class="grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1589307004173-3f79f5df0f92?auto=format&fit=crop&w=800&q=80"><div class="card-content"><h3>Produk Oleh-oleh Lokal</h3></div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1590935215987-3a820c2cb1ec?auto=format&fit=crop&w=800&q=80"><div class="card-content"><h3>Kuliner Tradisional UMKM</h3></div></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1563277744-2fbdc6efc56c?auto=format&fit=crop&w=800&q=80"><div class="card-content"><h3>Kerajinan Tangan Lokal</h3></div></div>
+    </div>
+  </section>
+
+  <!-- Galeri -->
+  <section class="section" id="galeri" style="background:#E3F0F5;">
+    <h2>Galeri Keindahan</h2>
+    <div class="grid">
+      <img src="https://images.unsplash.com/photo-1610641815204-7ddaa5efb6e5?auto=format&fit=crop&w=800&q=80">
+      <img src="https://images.unsplash.com/photo-1579586337165-45be8a6d7a87?auto=format&fit=crop&w=800&q=80">
+      <img src="https://images.unsplash.com/photo-1559119451-493ecb27bfff?auto=format&fit=crop&w=800&q=80">
+      <img src="https://images.unsplash.com/photo-1589307004173-3f79f5df0f92?auto=format&fit=crop&w=800&q=80">
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="section" id="map" style="background:#F1FAFF;">
+    <h2>Lokasi Ulun Danu Beratan</h2>
+    <div style="display:flex;justify-content:center;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.422516186481!2d115.08692097473438!3d-8.275022983792543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd1fb5a3c97adaa%3A0x5d9b2cf73257952f!2sUlun%20Danu%20Beratan%20Temple!5e0!3m2!1sen!2sid!4v1709780096423!5m2!1sen!2sid"
+      width="100%" height="400" style="border:0;max-width:900px;border-radius:10px;" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Helpdesk Button -->
+  <a class="helpdesk-btn" id="openHelpdesk">💬 Helpdesk</a>
+
+</div>
+
+<!-- History -->
+<div id="historySection" class="history-section text-center">
+  <h2>Riwayat Transaksi</h2>
+  <p class="text-muted mb-5">Pantau status pembelian tiket Anda secara real-time.</p>
+  <div id="riwayatContainer" class="d-flex flex-column align-items-center gap-3"></div>
+</div>
+
+<!-- Helpdesk Modal -->
+<div class="helpdesk-modal" id="helpdeskModal">
+  <div class="helpdesk-content">
+    <span class="close-btn" id="closeHelpdesk">&times;</span>
+    <h2>Hubungi Helpdesk</h2>
+    <form id="helpdeskForm">
+      <input type="text" id="name" placeholder="Nama" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <textarea id="message" placeholder="Pesan Anda..." required></textarea>
+      <button type="submit">Kirim Pesan ke Email</button>
+    </form>
+    <a class="wa-link" href="https://wa.me/6289644422473?text=Halo%20Admin,%20saya%20butuh%20bantuan" target="_blank">💬 Hubungi via WhatsApp</a>
+  </div>
+</div>
+
+<script>
+const homeBtn=document.getElementById("homeBtn");
+const historyBtn=document.getElementById("historyBtn");
+const homeSection=document.getElementById("homeSection");
+const historySection=document.getElementById("historySection");
+homeBtn.onclick=()=>{homeSection.style.display="block";historySection.style.display="none";}
+historyBtn.onclick=()=>{homeSection.style.display="none";historySection.style.display="block";}
+
+// Helpdesk modal
+const openBtn=document.getElementById("openHelpdesk");
+const closeBtn=document.getElementById("closeHelpdesk");
+const modal=document.getElementById("helpdeskModal");
+openBtn.onclick=()=>modal.style.display="flex";
+closeBtn.onclick=()=>modal.style.display="none";
+window.onclick=e=>{if(e.target===modal)modal.style.display="none";}
+
+// Form mailto
+document.getElementById("helpdeskForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  let n=document.getElementById("name").value;
+  let em=document.getElementById("email").value;
+  let m=document.getElementById("message").value;
+  window.location.href=`mailto:rhimavani05@gmail.com?subject=Pesan dari ${n}&body=Nama: ${n}%0AEmail: ${em}%0A%0APesan:%0A${m}`;
+});
+
+// Riwayat
+const dataPemesanan=[
+  {id:"ORD-001",nama:"Rani Kusuma",tanggal:"2025-11-05",status:"Berhasil"},
+  {id:"ORD-002",nama:"Budi Santoso",tanggal:"2025-11-05",status:"Diproses"},
+  {id:"ORD-003",nama:"Lina Amalia",tanggal:"2025-11-04",status:"Gagal"}
+];
+const container=document.getElementById("riwayatContainer");
+dataPemesanan.forEach((x,i)=>{
+  let warna,ikon,desc;
+  if(x.status==="Berhasil"){warna="#d4f8e8";ikon="✅";desc="Tiket Anda telah dikonfirmasi.";}
+  else if(x.status==="Diproses"){warna="#fff9db";ikon="⏳";desc="Pesanan sedang diproses oleh admin.";}
+  else{warna="#ffe5e5";ikon="❌";desc="Transaksi gagal. Silakan hubungi helpdesk.";}
+  container.innerHTML+=`
+  <div class="card status-card shadow-sm border-0 w-75" style="background:${warna};border-radius:15px;animation:fadeUp .6s ease ${i*0.2}s both;">
+    <div class="card-body text-start p-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="fw-bold mb-0" style="color:#2E6F83;">${ikon} ${x.status}</h5>
+        <small class="text-muted">#${x.id}</small>
+      </div>
+      <p class="mb-1"><strong>Nama Pemesan:</strong> ${x.nama}</p>
+      <p class="mb-1"><strong>Tanggal:</strong> ${x.tanggal}</p>
+      <p class="mt-2 text-muted" style="font-size:0.9rem;">${desc}</p>
+    </div>
+  </div>`;
+});
+</script>
+</body>
+</html>
