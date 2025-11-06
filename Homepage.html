@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ulun Danu Beratan</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Monoton&family=Oswald:wght@200..700&display=swap&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  /* History */
+.history-section {display:none;background:#EAF6FB;padding:4rem 0;min-height:80vh;}
+.history-section h2 {text-align:center;margin-bottom:1rem;color:#3A7CA5;}
+.status-card {transition:transform .3s,opacity .3s;}
+.status-card:hover {transform:translateY(-5px);}
+</style>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Ulun Danu Beratan<span>.</span></div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="history">History</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="slider">
+      <img src="image1.jpg" class="slide active">
+      <img src="image2.jpg" class="slide">
+      <img src="image3.jpg" class="slide">
+    </div>
+    <div class="hero-content">
+      <h1>Selamat Datang di <br><span>Ulun Danu Beratan</span></h1>
+      <p>Temukan keindahan dan kesejukan alam Bali di Ulun Danu Beratan.</p>
+      <a href="#" id="bookingBtn" class="btn-book">Book Now!</a>
+    </div>
+  </section>
+
+  <!-- Informasi Wisata -->
+  <section class="info">
+    <h2>Informasi Wisata</h2>
+    <div class="info-cards">
+      <div class="card">
+        <img src="ulundanu1.jpg" alt="Pura Ulun Danu Beratan">
+        <h3>Speedboat</h3>
+        <p>Rp.200.000<br>
+        Kapasitas: 5 Orang<br>
+        Durasi: 1 Jam</p>
+      </div>
+
+      <div class="card">
+        <img src="ulundanu2.jpg" alt="Danau Beratan">
+        <h3>Sampan Gayung</h3>
+        <p>Rp.75.000<br>
+        Kapasitas: 5 Orang<br>
+        Durasi: 30 Menit</p>
+      </div>
+
+      <div class="card">
+        <img src="ulundanu3.jpg" alt="Taman Sekitar Pura">
+        <h3>Sepeda Bebek</h3>
+        <p>Rp.40.000<br>
+        Kapasitas: 2 Orang<br>
+        Durasi: 30 Menit</p>
+      </div>
+      <a class="btn-main" href="#">Lihat Selengkapnya Wisata</a>
+    </div>
+
+    <h2>UMKM di Sekitar</h2>
+    <p>Dukung produk lokal! Temukan berbagai kuliner dan kerajinan tangan khas Bali yang dibuat oleh UMKM setempat di area wisata Ulun Danu Beratan.</p>
+  </section>
+  <!-- Map -->
+<section class="section" id="map">
+  <h2>Lokasi Ulun Danu Beratan</h2>
+  <p class="text-muted mb-4">Lihat lokasi asli Pura Ulun Danu Beratan di Bedugul, Bali.</p>
+  <div style="display:flex;justify-content:center;">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d395.27492093549347!2d115.1667121266241!3d-8.27502413578601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd1896c9fac0857%3A0x18246568e4db1b53!2sPura%20Ulun%20Danu%20Beratan%20Bedugul!5e0!3m2!1sid!2sid!4v1762370663622!5m2!1sid!2sid"
+      width="600"
+      height="450"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <a 
+      href="https://goo.gl/maps/URi3XEjgrWVLvw8b7" 
+      target="_blank" 
+      class="btn-main">
+      Buka di Google Maps
+    </a>
+  </div>
+</section>
+
+
+  <!-- Tombol Helpdesk -->
+  <div class="helpdesk-btn" id="helpdeskBtn">
+    💬 Helpdesk
+  </div>
+
+
+<script>
+  // === CEK STATUS LOGIN DAN TAMPILKAN NAMA ===
+  const navBar = document.querySelector("nav");
+  const heroContent = document.querySelector(".hero-content");
+
+  function updateNavbar() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const userData = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (isLoggedIn && userData) {
+      // ubah navbar jadi home + logout
+      navBar.innerHTML = `
+        <a href="#">Home</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      `;
+
+      // tambahin teks selamat datang
+      const welcomeMsg = document.createElement("p");
+      welcomeMsg.textContent = "Selamat datang, " + userData.fullname + " 👋";
+      welcomeMsg.style.marginTop = "10px";
+      welcomeMsg.style.fontWeight = "600";
+      welcomeMsg.style.fontSize = "1.1rem";
+      welcomeMsg.style.color = "#ffdd57";
+
+      heroContent.insertBefore(welcomeMsg, heroContent.querySelector(".btn-book"));
+
+      // tombol logout
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("currentUser");
+        window.location.href = "index.html";
+      });
+    }
+  }
+
+  updateNavbar();
+</script>
+  <script src="script.js"></script>
+</body>
+</html>
